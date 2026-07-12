@@ -24,8 +24,10 @@ function EnquiryPage() {
     if (!/^[+]?[\d\s-]{10,15}$/.test(form.phone.trim())) {
       setError('Please enter a valid phone number (10–15 digits).');
       return;
-    }
-    setStatus('loading');
+    }    if (!pocketbaseClient) {
+      setError('Enquiry form is not configured yet. Set VITE_POCKETBASE_URL in your deployment environment.');
+      return;
+    }    setStatus('loading');
     try {
       await pocketbaseClient.collection('enquiries').create({
         ...form,
