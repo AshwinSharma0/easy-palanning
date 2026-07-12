@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { CheckCircle2, MessageCircle, Loader2 } from 'lucide-react';
 import PageHead from '@/components/PageHead';
 import Button from '@/components/Button';
-import pocketbaseClient from '@/lib/pocketbaseClient';
+//import pocketbaseClient from '@/lib/pocketbaseClient';
 import { eventTypeOptions, waLink } from '@/data/content';
 
 const empty = { name: '', phone: '', event_type: '', event_date: '', guest_count: '', budget: '', message: '' };
@@ -15,31 +15,59 @@ function EnquiryPage() {
   const set = (k) => (e) => setForm((f) => ({ ...f, [k]: e.target.value }));
 
   const submit = async (e) => {
-    e.preventDefault();
-    setError('');
-    if (!form.name.trim() || !form.phone.trim() || !form.event_type) {
-      setError('Please fill in your name, phone and event type.');
-      return;
-    }
-    if (!/^[+]?[\d\s-]{10,15}$/.test(form.phone.trim())) {
-      setError('Please enter a valid phone number (10–15 digits).');
-      return;
-    }    if (!pocketbaseClient) {
-      setError('Enquiry form is not configured yet. Set VITE_POCKETBASE_URL in your deployment environment.');
-      return;
-    }    setStatus('loading');
-    try {
-      await pocketbaseClient.collection('enquiries').create({
-        ...form,
-        guest_count: Number(form.guest_count) || 0,
-      });
-      setStatus('success');
+  e.preventDefault();
+  setError("");
+
+  if (!form.name.trim() || !form.phone.trim() || !form.event_type) {
+    setError("Please fill in your name, phone and event type.");
+    return;
+  }
+
+  if (!/^[+]?[\d\s-]{10,15}$/.test(form.phone.trim())) {
+    setError("Please enter a valid phone number (10–15 digits).");
+    return;
+  }
+
+  setStatus("loading");
+
+  try {
+    const response = await fetch("https://api.web3forms.com/submit", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      body: JSON.stringify({
+        access_key: import.meta.env.VITE_WEB3FORMS_ACCESS_KEY,
+
+        subject: "New Event Enquiry",
+
+        from_name: form.name,
+
+        name: form.name,
+        phone: form.phone,
+        event_type: form.event_type,
+        event_date: form.event_date,
+        guest_count: form.guest_count,
+        budget: form.budget,
+        message: form.message,
+      }),
+    });
+
+    const result = await response.json();
+
+    if (result.success) {
+      setStatus("success");
       setForm(empty);
-    } catch {
-      setStatus('idle');
-      setError('Something went wrong. Please try WhatsApp instead.');
+    } else {
+      setStatus("idle");
+      setError("Failed to send enquiry. Please try again.");
     }
-  };
+  } catch (err) {
+    setStatus("idle");
+    setError("Something went wrong. Please try again.");
+  }
+};
 
   const inputCls = 'w-full rounded-xl border border-input bg-background px-4 py-3 min-h-[48px] focus:outline-none focus:ring-2 focus:ring-primary';
 
