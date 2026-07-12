@@ -66,7 +66,7 @@ export const gallery = [
   'https://images.hostinger.com/e322cf63-5c44-4b60-9d5f-400cfee4ba62.png',
 ];
 
-export const WHATSAPP_NUMBER = '919876543210';
+export const WHATSAPP_NUMBER = '7985307537';
 export const waLink = (text = 'Hi EventEase, I would like to plan an event!') =>
   `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`;
 

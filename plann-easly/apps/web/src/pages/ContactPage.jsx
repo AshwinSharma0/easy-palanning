@@ -30,7 +30,7 @@ function ContactPage() {
   const inputCls = 'w-full rounded-xl border border-input bg-background px-4 py-3 min-h-[48px] focus:outline-none focus:ring-2 focus:ring-primary';
   const details = [
     { icon: Phone, label: 'Call us', value: '+91 7985307537' },
-    { icon: Mail, label: 'Email', value: 'ankitshukla@gmail.com' },
+    { icon: Mail, label: 'Email', value: 'ankitshukla9391@gmail.com' },
     { icon: MapPin, label: 'Visit', value: 'Noida,Uttar Pradesh, India' },
   ];
 

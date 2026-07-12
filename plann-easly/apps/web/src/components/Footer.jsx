@@ -29,8 +29,8 @@ function Footer() {
         <div>
           <h4 className="font-semibold text-white mb-3">Contact</h4>
           <ul className="space-y-3 text-sm text-white/70">
-            <li className="flex gap-2"><Phone className="h-4 w-4 mt-0.5" /> +91 98765 43210</li>
-            <li className="flex gap-2"><Mail className="h-4 w-4 mt-0.5" /> ankitshukla@gmail.com</li>
+            <li className="flex gap-2"><Phone className="h-4 w-4 mt-0.5" /> +91 79853 07537</li>
+            <li className="flex gap-2"><Mail className="h-4 w-4 mt-0.5" /> ankitshukla9391@gmail.com</li>
             <li className="flex gap-2"><MapPin className="h-4 w-4 mt-0.5" /> Noida,Uttar Pradesh, India</li>
           </ul>
         </div>
