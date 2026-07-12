@@ -57,12 +57,40 @@ function EnquiryPage() {
     const result = await response.json();
 
     if (result.success) {
-      setStatus("success");
-      setForm(empty);
-    } else {
-      setStatus("idle");
-      setError("Failed to send enquiry. Please try again.");
-    }
+
+  const whatsappMessage = `
+🎉 New Event Enquiry
+
+👤 Name: ${form.name}
+📞 Phone: ${form.phone}
+🎈 Event Type: ${form.event_type}
+📅 Event Date: ${form.event_date || "Not Provided"}
+👥 Guest Count: ${form.guest_count || "Not Provided"}
+💰 Budget: ${form.budget || "Not Provided"}
+
+📝 Message:
+${form.message || "No message"}
+
+Thank you!
+`;
+
+  // Replace with your WhatsApp number
+  const whatsappNumber = "917985307537";
+
+  window.open(
+    `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(
+      whatsappMessage
+    )}`,
+    "_blank"
+  );
+
+  setStatus("success");
+  setForm(empty);
+
+} else {
+  setStatus("idle");
+  setError("Failed to send enquiry. Please try again.");
+}
   } catch (err) {
     setStatus("idle");
     setError("Something went wrong. Please try again.");
