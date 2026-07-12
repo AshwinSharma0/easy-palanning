@@ -1,0 +1,163 @@
+# 🎉 Plann-Easly
+
+**Plann-Easly** is a smart event management platform that simplifies planning and organizing events by bringing venues, catering, decorations, entertainment, and other event services together in one place.
+
+Whether you're organizing a birthday party, college farewell, corporate event, anniversary, or family gathering, Plann-Easly helps you plan everything within your budget through an intuitive and user-friendly interface.
+
+---
+
+## ✨ Features
+
+* 📅 Create and manage events
+* 🏛️ Venue selection and recommendations
+* 🍽️ Food and catering management
+* 🎈 Decoration theme selection
+* 🎵 Music & entertainment booking
+* 📸 Photography & videography services
+* 💰 Real-time budget calculator
+* 📊 Smart event dashboard
+* 🤖 AI-powered recommendations (planned)
+* 🛍️ Vendor marketplace (planned)
+
+---
+
+## 🚀 Tech Stack
+
+### Frontend
+
+* React
+* Vite
+* JavaScript
+* Tailwind CSS
+* Shadcn/UI
+
+### Backend (Planned)
+
+* Node.js
+* Express.js
+
+### Database (Planned)
+
+* PocketBase / MongoDB
+
+### Other Tools
+
+* Git & GitHub
+* npm
+* REST APIs
+
+---
+
+## 📂 Project Structure
+
+```text
+plann-easly/
+│
+├── apps/
+│   └── web/
+│       ├── src/
+│       ├── public/
+│       ├── package.json
+│       └── vite.config.js
+│
+├── package.json
+└── README.md
+```
+
+---
+
+## ⚙️ Installation
+
+Clone the repository:
+
+```bash
+git clone https://github.com/AshwinSharma0/easy-palanning.git
+```
+
+Move into the project:
+
+```bash
+cd easy-palanning
+```
+
+Install dependencies:
+
+```bash
+cd apps/web
+npm install
+```
+
+Start the development server:
+
+```bash
+npm run dev
+```
+
+---
+
+## 🎯 Future Roadmap
+
+* User authentication
+* Vendor onboarding portal
+* Secure online payments
+* Booking management
+* Email & SMS notifications
+* AI budget planner
+* Personalized event recommendations
+* Admin dashboard
+* Vendor verification system
+* Mobile application
+
+---
+
+## 💡 Problem Statement
+
+Planning an event usually requires coordinating multiple vendors, comparing prices, managing bookings, and staying within budget. This process is often time-consuming and confusing.
+
+Plann-Easly aims to solve this by providing a single platform where users can plan, customize, and manage their entire event seamlessly.
+
+---
+
+## 👥 Target Users
+
+* Students
+* Families
+* Colleges & Universities
+* Event Organizers
+* Startups
+* Small Businesses
+* Corporate Teams
+
+---
+
+## 📈 Vision
+
+To become an all-in-one event planning platform that makes organizing events simple, affordable, and stress-free by connecting users with trusted vendors and smart planning tools.
+
+---
+
+## 🤝 Contributing
+
+Contributions are welcome!
+
+1. Fork the repository
+2. Create a feature branch
+3. Commit your changes
+4. Push your branch
+5. Open a Pull Request
+
+---
+
+## 📄 License
+
+This project is licensed under the MIT License.
+
+---
+
+## 👨‍💻 Author
+
+**Ashwin Sharma**
+
+* GitHub: https://github.com/AshwinSharma0
+
+If you like this project, consider giving it a ⭐ on GitHub!

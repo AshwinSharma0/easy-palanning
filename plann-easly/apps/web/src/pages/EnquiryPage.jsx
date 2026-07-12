@@ -33,7 +33,7 @@ function EnquiryPage() {
       });
       setStatus('success');
       setForm(empty);
-    } catch (err) {
+    } catch {
       setStatus('idle');
       setError('Something went wrong. Please try WhatsApp instead.');
     }

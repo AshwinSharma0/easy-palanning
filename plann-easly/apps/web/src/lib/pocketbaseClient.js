@@ -1,7 +1,6 @@
 import PocketBase from 'pocketbase';
 
-const pocketbaseClient = new PocketBase(
-  import.meta.env.VITE_POCKETBASE_URL || 'http://127.0.0.1:8090'
-);
+const pocketbaseUrl = import.meta.env.VITE_POCKETBASE_URL?.trim();
+const pocketbaseClient = pocketbaseUrl ? new PocketBase(pocketbaseUrl) : null;
 
 export default pocketbaseClient;

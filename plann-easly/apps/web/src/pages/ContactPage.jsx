@@ -15,6 +15,10 @@ function ContactPage() {
     e.preventDefault();
     setError('');
     if (!form.name.trim() || !form.phone.trim()) { setError('Name and phone are required.'); return; }
+    if (!pocketbaseClient) {
+      setError('Contact form is not configured yet. Set VITE_POCKETBASE_URL in your deployment environment.');
+      return;
+    }
     try {
       await pocketbaseClient.collection('enquiries').create({
         name: form.name, phone: form.phone, event_type: 'General Contact', message: form.message, guest_count: 0,
@@ -48,7 +52,7 @@ function ContactPage() {
           {sent ? (
             <div className="text-center py-10">
               <CheckCircle2 className="mx-auto h-14 w-14 text-green-600" />
-              <p className="mt-4 text-muted-foreground">Thanks for reaching out! We'll get back to you soon.</p>
+              <p className="mt-4 text-muted-foreground">Thanks for reaching out! We&apos;ll get back to you soon.</p>
             </div>
           ) : (
             <form onSubmit={submit} className="grid gap-5">
