@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Phone, Mail, MapPin, MessageCircle, CheckCircle2 } from 'lucide-react';
 import PageHead from '@/components/PageHead';
 import Button from '@/components/Button';
-import pocketbaseClient from '@/lib/pocketbaseClient';
+//import pocketbaseClient from '@/lib/pocketbaseClient';
 import { waLink } from '@/data/content';
 
 function ContactPage() {
@@ -12,20 +12,80 @@ function ContactPage() {
   const set = (k) => (e) => setForm((f) => ({ ...f, [k]: e.target.value }));
 
   const submit = async (e) => {
-    e.preventDefault();
-    setError('');
-    if (!form.name.trim() || !form.phone.trim()) { setError('Name and phone are required.'); return; }
-    if (!pocketbaseClient) {
-      setError('Contact form is not configured yet. Set VITE_POCKETBASE_URL in your deployment environment.');
-      return;
-    }
-    try {
-      await pocketbaseClient.collection('enquiries').create({
-        name: form.name, phone: form.phone, event_type: 'General Contact', message: form.message, guest_count: 0,
-      });
+  e.preventDefault();
+
+  setError("");
+
+  if (!form.name.trim() || !form.phone.trim()) {
+    setError("Name and phone are required.");
+    return;
+  }
+
+  if (!/^[+]?[\d\s-]{10,15}$/.test(form.phone.trim())) {
+    setError("Please enter a valid phone number.");
+    return;
+  }
+
+  try {
+    const response = await fetch("https://api.web3forms.com/submit", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      body: JSON.stringify({
+        access_key: import.meta.env.VITE_WEB3FORMS_ACCESS_KEY,
+
+        subject: "New Contact Request",
+
+        from_name: form.name,
+
+        name: form.name,
+        phone: form.phone,
+        message: form.message,
+      }),
+    });
+
+    const result = await response.json();
+
+    if (result.success) {
+
+      const whatsappMessage = `
+📩 New Contact Request
+
+👤 Name: ${form.name}
+📞 Phone: ${form.phone}
+
+📝 Message:
+${form.message || "No message"}
+
+`;
+
+      // Replace with YOUR WhatsApp number
+      const whatsappNumber = "917985307537";
+
+      window.open(
+        `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(
+          whatsappMessage
+        )}`,
+        "_blank"
+      );
+
       setSent(true);
-    } catch { setError('Something went wrong. Please try WhatsApp.'); }
-  };
+      setForm({
+        name: "",
+        phone: "",
+        message: "",
+      });
+
+    } else {
+      setError("Unable to send message.");
+    }
+
+  } catch (error) {
+    setError("Something went wrong. Please try again.");
+  }
+};
 
   const inputCls = 'w-full rounded-xl border border-input bg-background px-4 py-3 min-h-[48px] focus:outline-none focus:ring-2 focus:ring-primary';
   const details = [
